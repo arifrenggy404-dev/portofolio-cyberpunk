@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Attributes\Casts;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Model;
@@ -17,10 +16,12 @@ use Illuminate\Database\Eloquent\Model;
     'tautan_github',
     'jalur_gambar',
 ])]
-#[Casts([
-    'teknologi_utama' => 'array',
-])]
 class Proyek extends Model
 {
-    // Model dikonfigurasi sepenuhnya via Attributes bawaan Laravel 13
+    protected function casts(): array
+    {
+        return [
+            'teknologi_utama' => 'array',
+        ];
+    }
 }
