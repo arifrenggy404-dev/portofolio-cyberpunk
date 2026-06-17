@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Attributes\Table;
-use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Casts;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Attributes\Table;
+use Illuminate\Database\Eloquent\Model;
 
 #[Table('proyek')]
 #[Fillable([
@@ -15,10 +15,10 @@ use Illuminate\Database\Eloquent\Attributes\Casts;
     'teknologi_utama',
     'tautan_langsung',
     'tautan_github',
-    'jalur_gambar'
+    'jalur_gambar',
 ])]
 #[Casts([
-    'teknologi_utama' => 'array'
+    'teknologi_utama' => 'array',
 ])]
 class Proyek extends Model
 {

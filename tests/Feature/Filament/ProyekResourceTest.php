@@ -3,7 +3,6 @@
 namespace Tests\Feature\Filament;
 
 use App\Models\User;
-use App\Models\Proyek;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -50,7 +49,7 @@ class ProyekResourceTest extends TestCase
         $this->actingAs($userUppercase)->get('/admin')->assertSuccessful();
 
         // Mengubah lingkungan aplikasi (environment) secara sementara ke produksi (production)
-        $this->app->detectEnvironment(fn() => 'production');
+        $this->app->detectEnvironment(fn () => 'production');
 
         // Memverifikasi bahwa email non-@cyberpunk.io tidak dapat mengakses panel
         $userGmail = User::factory()->create(['email' => 'user@gmail.com']);

@@ -14,7 +14,7 @@ class SeederProyekTest extends TestCase
     public function test_tabel_proyek_memiliki_kolom_yang_sesuai(): void
     {
         $this->assertTrue(Schema::hasTable('proyek'));
-        
+
         $this->assertTrue(Schema::hasColumns('proyek', [
             'id',
             'nama_proyek',
@@ -25,7 +25,7 @@ class SeederProyekTest extends TestCase
             'tautan_github',
             'jalur_gambar',
             'created_at',
-            'updated_at'
+            'updated_at',
         ]));
     }
 

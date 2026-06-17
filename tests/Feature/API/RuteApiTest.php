@@ -11,9 +11,9 @@ class RuteApiTest extends TestCase
         $response = $this->getJson('/api/ping');
 
         $response->assertStatus(200)
-                 ->assertJson([
-                     'status' => 'aktif',
-                     'pesan' => 'API Portofolio Cyberpunk siap'
-                 ]);
+            ->assertJson([
+                'status' => 'aktif',
+                'pesan' => 'API Portofolio Cyberpunk siap',
+            ]);
     }
 }

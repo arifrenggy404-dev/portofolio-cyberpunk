@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Models\Proyek;
+use Database\Seeders\SeederProyek;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Inertia\Testing\AssertableInertia as Assert;
 use Tests\TestCase;
@@ -13,7 +13,7 @@ class PortofolioTest extends TestCase
 
     public function test_halaman_utama_portofolio_dapat_diakses(): void
     {
-        $this->seed(\Database\Seeders\SeederProyek::class);
+        $this->seed(SeederProyek::class);
 
         $response = $this->get('/');
 

@@ -6,8 +6,8 @@ use App\Filament\Resources\ProyekResource\Pages;
 use App\Models\Proyek;
 use Filament\Actions;
 use Filament\Forms;
-use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
@@ -16,9 +16,12 @@ class ProyekResource extends Resource
 {
     protected static ?string $model = Proyek::class;
 
-    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-briefcase';
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-briefcase';
+
     protected static ?string $navigationLabel = 'Kelola Proyek';
+
     protected static ?string $modelLabel = 'Proyek';
+
     protected static ?string $pluralModelLabel = 'Daftar Proyek';
 
     public static function form(Schema $form): Schema
@@ -33,39 +36,39 @@ class ProyekResource extends Resource
                             ->maxLength(255)
                             ->live(onBlur: true)
                             ->afterStateUpdated(fn ($state, callable $set) => $set('tautan_slug', Str::slug($state))),
-                        
+
                         Forms\Components\TextInput::make('tautan_slug')
                             ->label('Tautan Slug')
                             ->required()
                             ->unique(Proyek::class, 'tautan_slug', ignoreRecord: true)
                             ->maxLength(255),
-                        
+
                         Forms\Components\Textarea::make('deskripsi')
                             ->label('Deskripsi Proyek')
                             ->required()
                             ->rows(4),
-                        
+
                         Forms\Components\TagsInput::make('teknologi_utama')
                             ->label('Teknologi Utama')
                             ->required()
                             ->placeholder('Tambah teknologi...'),
-                        
+
                         Forms\Components\FileUpload::make('jalur_gambar')
                             ->label('Gambar Sampul Proyek')
                             ->directory('gambar-proyek')
                             ->image()
                             ->nullable(),
-                        
+
                         Forms\Components\TextInput::make('tautan_langsung')
                             ->label('Tautan Demo Live')
                             ->url()
                             ->nullable(),
-                        
+
                         Forms\Components\TextInput::make('tautan_github')
                             ->label('Tautan Repositori GitHub')
                             ->url()
                             ->nullable(),
-                    ])
+                    ]),
             ]);
     }
 

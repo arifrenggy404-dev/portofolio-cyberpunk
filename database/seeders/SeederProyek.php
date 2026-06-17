@@ -33,7 +33,7 @@ class SeederProyek extends Seeder
                 'jalur_gambar' => 'gambar/distrik7.jpg',
                 'created_at' => now(),
                 'updated_at' => now(),
-            ]
+            ],
         ]);
     }
 }
