@@ -150,6 +150,7 @@ export default function InteractiveCli({ isOpen, onClose }) {
     ]);
     const [isMatrixActive, setIsMatrixActive] = useState(false);
     const [visitorId, setVisitorId] = useState('');
+    const [currentPath, setCurrentPath] = useState('/home/visitor');
 
     const logContainerRef = useRef(null);
     const inputRef = useRef(null);
@@ -477,7 +478,9 @@ export default function InteractiveCli({ isOpen, onClose }) {
             </div>
 
             <div className="flex items-center gap-2 relative z-20">
-                <span className="text-terminal-accent">visitor@arif-renggy:~$</span>
+                <span className="text-terminal-accent">
+                    visitor@arif-renggy:{currentPath.replace(/^\/home\/visitor/, '~')}$
+                </span>
                 <input
                     ref={inputRef}
                     type="text"
