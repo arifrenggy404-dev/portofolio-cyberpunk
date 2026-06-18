@@ -13,9 +13,22 @@ export default function Misi({ proyek = [] }) {
     return (
         <ArsipLayout>
             <Head>
-                <title>Laporan Misi</title>
+                <title>Laporan Misi Proyek | Arif Renggy - Fullstack Developer</title>
                 <meta name="description" content="Arsip portofolio proyek dan misi digital yang berhasil dikerjakan oleh Arif Renggy menggunakan PHP/Laravel, React, dan database SQL." />
                 <meta name="keywords" content="Proyek Web, Showcase Laravel, Aplikasi React, Portofolio PHP, Arif Renggy" />
+                
+                {/* Open Graph / Facebook */}
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content="https://arifrenggy.site/misi" />
+                <meta property="og:title" content="Laporan Misi Proyek | Arif Renggy - Fullstack Developer" />
+                <meta property="og:description" content="Arsip portofolio proyek dan misi digital yang berhasil dikerjakan oleh Arif Renggy menggunakan PHP/Laravel, React, dan database SQL." />
+                <meta property="og:site_name" content="Arif Renggy Portfolio" />
+                
+                {/* Twitter */}
+                <meta name="twitter:card" content="summary" />
+                <meta name="twitter:url" content="https://arifrenggy.site/misi" />
+                <meta name="twitter:title" content="Laporan Misi Proyek | Arif Renggy - Fullstack Developer" />
+                <meta name="twitter:description" content="Arsip portofolio proyek dan misi digital yang berhasil dikerjakan oleh Arif Renggy menggunakan PHP/Laravel, React, dan database SQL." />
             </Head>
             <div className="space-y-6">
                 <div className="flex justify-between items-center border-b border-gray-800 pb-2">
@@ -23,9 +36,9 @@ export default function Misi({ proyek = [] }) {
                     <span className="text-[10px] text-gray-600 font-mono">TOTAL_MISI: {proyek.length}</span>
                 </div>
                 
-                <div className="grid grid-cols-1 gap-6">
+                <ul className="grid grid-cols-1 gap-6">
                     {proyek.map((p) => (
-                        <div key={p.id} className="border border-gray-800 p-5 relative group hover:border-terminal-primary/50 transition-all bg-[#1a1a1c]/20">
+                        <li key={p.id} className="border border-gray-800 p-5 relative group hover:border-terminal-primary/50 transition-all bg-[#1a1a1c]/20">
                             {/* Efek Sudut Cyberpunk */}
                             <div className="absolute top-0 right-0 w-3 h-3 bg-gray-800 group-hover:bg-terminal-primary clip-path-polygon transition-colors"></div>
                             
@@ -35,12 +48,12 @@ export default function Misi({ proyek = [] }) {
                                     {p.jalur_gambar ? (
                                         <img 
                                             src={`/storage/${p.jalur_gambar}`} 
-                                            alt={p.nama_proyek} 
+                                            alt={`Tampilan visual untuk proyek ${p.nama_proyek}`} 
                                             className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity"
                                         />
                                     ) : (
                                         <div className="w-full h-full flex flex-col justify-center items-center text-gray-700">
-                                            <Cpu size={24} className="mb-1 opacity-20" />
+                                            <Cpu size={24} className="mb-1 opacity-20" aria-hidden="true" />
                                             <span className="text-[8px] font-mono tracking-tighter">TIADA_VISUAL</span>
                                         </div>
                                     )}
@@ -70,34 +83,38 @@ export default function Misi({ proyek = [] }) {
                                     <div className="flex gap-6 pt-2 border-t border-gray-900">
                                         {p.tautan_github ? (
                                             <a 
+                                                id={`project-source-${p.id}`}
                                                 href={p.tautan_github} 
                                                 target="_blank" 
                                                 rel="noopener noreferrer"
                                                 className="text-[10px] font-mono text-gray-500 hover:text-white uppercase flex items-center gap-1.5 transition-colors"
+                                                aria-label={`Lihat kode sumber ${p.nama_proyek} di GitHub (terbuka di tab baru)`}
                                             >
-                                                <IkonGithub size={12} /> /KODE_SUMBER
+                                                <IkonGithub size={12} aria-hidden="true" /> /KODE_SUMBER
                                             </a>
                                         ) : (
                                             <span className="text-[10px] font-mono text-gray-700 uppercase flex items-center gap-1.5 cursor-not-allowed">
-                                                <ShieldAlert size={12} /> /DATA_PRIVAT
+                                                <ShieldAlert size={12} aria-hidden="true" /> /DATA_PRIVAT
                                             </span>
                                         )}
                                         {p.tautan_langsung && (
                                             <a 
+                                                id={`project-demo-${p.id}`}
                                                 href={p.tautan_langsung} 
                                                 target="_blank" 
                                                 rel="noopener noreferrer"
                                                 className="text-[10px] font-mono text-terminal-primary hover:text-white uppercase flex items-center gap-1.5 transition-colors"
+                                                aria-label={`Akses langsung demo ${p.nama_proyek} (terbuka di tab baru)`}
                                             >
-                                                /AKSES_DEMO <ExternalLink size={10} />
+                                                /AKSES_DEMO <ExternalLink size={10} aria-hidden="true" />
                                             </a>
                                         )}
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </li>
                     ))}
-                </div>
+                </ul>
             </div>
         </ArsipLayout>
     );
