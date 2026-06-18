@@ -10,6 +10,8 @@ import InteractiveCli from '../Components/InteractiveCli';
 export default function ArsipLayout({ children }) {
     const [logs, setLogs] = useState([]);
     const [isCliOpen, setIsCliOpen] = useState(false);
+    const [isTransitioning, setIsTransitioning] = useState(false);
+    const [loadingProgress, setLoadingProgress] = useState(0);
 
     const addLog = (message, type = 'SYS') => {
         const id = Math.random().toString(36).substr(2, 9);
@@ -32,18 +34,38 @@ export default function ArsipLayout({ children }) {
 
         // Inertia Navigation Logs
         const startListener = router.on('start', (event) => {
+            setIsTransitioning(true);
+            setLoadingProgress(10);
             addLog(`FETCHING_NODE: ${event.detail.visit.url.pathname}`, 'INFO');
         });
 
+        const progressInterval = isTransitioning && setInterval(() => {
+            setLoadingProgress(prev => {
+                if (prev >= 90) return prev;
+                return prev + Math.floor(Math.random() * 15 + 5);
+            });
+        }, 80);
+
         const finishListener = router.on('finish', () => {
-            addLog('DOM_UPDATED_READY', 'SYS');
+            setLoadingProgress(100);
+            setTimeout(() => {
+                setIsTransitioning(false);
+                setLoadingProgress(0);
+                addLog('DOM_UPDATED_READY', 'SYS');
+            }, 350); // Small delay to appreciate the CRT glitch
         });
 
         return () => {
             startListener();
             finishListener();
+            if (progressInterval) clearInterval(progressInterval);
         };
-    }, []);
+    }, [isTransitioning]);
+
+    const renderProgressBar = () => {
+        const blocks = Math.floor(loadingProgress / 10);
+        return '[' + '='.repeat(blocks) + ' '.repeat(10 - blocks) + ']';
+    };
 
     const navItems = [
         { href: '/identitas', label: 'identitas', icon: Cpu },
@@ -59,6 +81,23 @@ export default function ArsipLayout({ children }) {
             <TerminalNotifications logs={logs} />
             
             <div className="absolute inset-0 scanline pointer-events-none opacity-5 z-50"></div>
+
+            {/* CRT Glitch Transition Overlay */}
+            {isTransitioning && (
+                <div className="fixed inset-0 bg-black/90 z-[90] flex flex-col justify-center items-center font-mono text-[#00f0ff] animate-crt-flicker pointer-events-auto select-none">
+                    <div className="absolute inset-0 scanline opacity-30 pointer-events-none"></div>
+                    <div className="absolute inset-0 bg-gradient-to-b from-[#00f0ff]/5 via-transparent to-[#00f0ff]/5 pointer-events-none"></div>
+                    
+                    <div className="space-y-4 text-center">
+                        <div className="text-sm tracking-widest text-neon-cyan animate-pulse">
+                            &gt; DECRYPTING NODE DATA...
+                        </div>
+                        <div className="text-xs text-gray-500">
+                            STABILIZING_UPLINK: {renderProgressBar()} {loadingProgress}%
+                        </div>
+                    </div>
+                </div>
+            )}
             
             <header className="max-w-7xl mx-auto border-b border-terminal pb-6 mb-8 flex flex-col md:flex-row justify-between items-center md:items-end gap-4 relative z-10">
                 <h1 className="sr-only">Arif Renggy - Portofolio Developer Laravel & React</h1>
