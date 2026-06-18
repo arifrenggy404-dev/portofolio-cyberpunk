@@ -12,6 +12,24 @@ echo "Mengatur izin akses direktori database..."
 chown -R www-data:www-data /var/www/html/database_persistent
 chmod -R 775 /var/www/html/database_persistent
 
+# Setup persistent storage uploads
+echo "Mengonfigurasi persistent storage uploads..."
+mkdir -p /var/www/html/database_persistent/storage
+chown -R www-data:www-data /var/www/html/database_persistent/storage
+chmod -R 775 /var/www/html/database_persistent/storage
+
+# Link Laravel's public storage folder to the persistent volume
+if [ ! -L /var/www/html/storage/app/public ]; then
+    echo "Membuat symlink dari storage/app/public ke database_persistent/storage..."
+    rm -rf /var/www/html/storage/app/public
+    ln -s /var/www/html/database_persistent/storage /var/www/html/storage/app/public
+    chown -h www-data:www-data /var/www/html/storage/app/public
+fi
+
+# Buat symbolic link Laravel untuk akses public
+echo "Membuat symbolic link storage:link..."
+php artisan storage:link --force
+
 # Inisialisasi database SQLite jika belum ada
 INITIAL_INSTALL=false
 if [ ! -f /var/www/html/database_persistent/database.sqlite ]; then
