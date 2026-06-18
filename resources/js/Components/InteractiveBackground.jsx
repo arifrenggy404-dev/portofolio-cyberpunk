@@ -13,7 +13,12 @@ export default function InteractiveBackground() {
         const maxParticles = 60;
         const mouse = { x: null, y: null, radius: 120 };
 
-        const colors = ['#00f0ff', '#ff007f'];
+        const getThemeColors = () => {
+            const style = getComputedStyle(document.documentElement);
+            const primary = style.getPropertyValue('--color-terminal-primary').trim() || '#00f0ff';
+            const accent = style.getPropertyValue('--color-terminal-accent').trim() || '#ff007f';
+            return [primary, accent];
+        };
 
         const resizeCanvas = () => {
             canvas.width = window.innerWidth;
@@ -30,6 +35,7 @@ export default function InteractiveBackground() {
                 this.vx = (Math.random() - 0.5) * 0.5;
                 this.vy = (Math.random() - 0.5) * 0.5;
                 this.radius = Math.random() * 2 + 1;
+                const colors = getThemeColors();
                 this.color = colors[Math.floor(Math.random() * colors.length)];
             }
 
@@ -47,6 +53,12 @@ export default function InteractiveBackground() {
                 // Bounce off edges
                 if (this.x < 0 || this.x > canvas.width) this.vx = -this.vx;
                 if (this.y < 0 || this.y > canvas.height) this.vy = -this.vy;
+
+                // Update particle color to match current theme dynamically
+                const colors = getThemeColors();
+                if (!colors.includes(this.color)) {
+                    this.color = colors[Math.floor(Math.random() * colors.length)];
+                }
             }
         }
 
@@ -60,6 +72,9 @@ export default function InteractiveBackground() {
         init();
 
         const connect = () => {
+            const colors = getThemeColors();
+            const primaryColor = colors[0];
+
             for (let a = 0; a < particles.length; a++) {
                 for (let b = a; b < particles.length; b++) {
                     const dx = particles[a].x - particles[b].x;
@@ -68,7 +83,9 @@ export default function InteractiveBackground() {
 
                     if (distance < 100) {
                         const opacity = (1 - distance / 100) * 0.15;
-                        ctx.strokeStyle = `rgba(0, 240, 255, ${opacity})`;
+                        ctx.strokeStyle = primaryColor.startsWith('#')
+                            ? `${primaryColor}${Math.floor(opacity * 255).toString(16).padStart(2, '0')}`
+                            : `rgba(0, 240, 255, ${opacity})`;
                         ctx.lineWidth = 0.5;
                         ctx.beginPath();
                         ctx.moveTo(particles[a].x, particles[a].y);
@@ -85,14 +102,14 @@ export default function InteractiveBackground() {
 
                     if (distance < mouse.radius) {
                         const opacity = (1 - distance / mouse.radius) * 0.35;
-                        ctx.strokeStyle = particles[a].color === '#00f0ff' 
-                            ? `rgba(0, 240, 255, ${opacity})` 
-                            : `rgba(255, 0, 127, ${opacity})`;
+                        ctx.strokeStyle = particles[a].color;
+                        ctx.globalAlpha = opacity;
                         ctx.lineWidth = 0.8;
                         ctx.beginPath();
                         ctx.moveTo(particles[a].x, particles[a].y);
                         ctx.lineTo(mouse.x, mouse.y);
                         ctx.stroke();
+                        ctx.globalAlpha = 1.0; // Reset alpha
                     }
                 }
             }
@@ -134,7 +151,7 @@ export default function InteractiveBackground() {
     return (
         <canvas
             ref={canvasRef}
-            className="fixed inset-0 w-full h-full -z-10 pointer-events-none opacity-40 bg-[#0a0a0c]"
+            className="fixed inset-0 w-full h-full -z-10 pointer-events-none opacity-40"
         />
     );
 }
