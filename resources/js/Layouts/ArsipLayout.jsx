@@ -115,14 +115,14 @@ export default function ArsipLayout({ children }) {
                 </div>
             )}
             
-            <header className="max-w-7xl mx-auto border-b border-terminal pb-6 mb-8 flex flex-col md:flex-row justify-between items-center md:items-end gap-4 relative z-10">
+            <header className="max-w-7xl mx-auto border-b border-terminal pb-6 mb-8 flex flex-row justify-between items-end gap-4 relative z-10">
                 <h1 className="sr-only">Arif Renggy - Portofolio Developer Laravel & React</h1>
-                <div className="flex flex-col items-center md:items-start gap-3 w-full md:w-auto">
+                <div className="flex flex-col items-start gap-3 w-auto">
                     <AsciiHeader />
                     <TelemetryWidget />
                 </div>
-                <div className="text-center md:text-right w-full md:w-auto">
-                    <div className="flex items-center justify-center md:justify-end gap-2 text-terminal-primary font-mono text-[10px] uppercase mb-1">
+                <div className="text-right w-auto">
+                    <div className="flex items-center justify-end gap-2 text-terminal-primary font-mono text-[10px] uppercase mb-1">
                         <span className="inline-block w-2 h-2 bg-terminal-primary rounded-full animate-pulse"></span>
                         Terminal Session: Active
                     </div>
@@ -132,7 +132,7 @@ export default function ArsipLayout({ children }) {
                 </div>
             </header>
 
-            <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 relative z-10">
+            <div className="max-w-7xl mx-auto grid grid-cols-4 gap-8 relative z-10">
                 <aside className="space-y-6">
                     <nav className="space-y-1">
                         <div className="text-terminal-primary text-[10px] font-mono mb-2 uppercase tracking-widest opacity-50">Directory</div>
@@ -149,7 +149,7 @@ export default function ArsipLayout({ children }) {
                     </nav>
                 </aside>
                 
-                <main className="md:col-span-3 border border-terminal p-6 relative bg-terminal-muted/10 backdrop-blur-sm min-h-[500px]">
+                <main className="col-span-3 border border-terminal p-6 relative bg-terminal-muted/10 backdrop-blur-sm min-h-[500px]">
                     {/* Decorative Terminal Corners */}
                     <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-terminal-primary"></div>
                     <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-terminal-primary"></div>

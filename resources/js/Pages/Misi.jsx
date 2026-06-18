@@ -29,9 +29,9 @@ export default function Misi({ proyek = [] }) {
                             {/* Efek Sudut Cyberpunk */}
                             <div className="absolute top-0 right-0 w-3 h-3 bg-gray-800 group-hover:bg-terminal-primary clip-path-polygon transition-colors"></div>
                             
-                            <div className="flex flex-col md:flex-row gap-6">
+                            <div className="flex flex-row gap-6">
                                 {/* Thumbnail Proyek */}
-                                <div className="w-full md:w-32 h-32 flex-shrink-0 border border-gray-800 bg-black overflow-hidden relative group-hover:border-terminal-primary/30 transition-colors">
+                                <div className="w-32 h-32 flex-shrink-0 border border-gray-800 bg-black overflow-hidden relative group-hover:border-terminal-primary/30 transition-colors">
                                     {p.jalur_gambar ? (
                                         <img 
                                             src={`/storage/${p.jalur_gambar}`} 

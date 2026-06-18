@@ -28,7 +28,7 @@ export default function Arsenal() {
                 <div className="grid grid-cols-1 gap-6">
                     {skills.map(s => (
                         <div key={s.name} className={`p-5 border transition-all ${s.isCore ? "border-terminal-accent/40 bg-terminal-accent/5 shadow-[0_0_15px_var(--color-terminal-muted)]" : "border-gray-800 bg-[#1a1a1c]/20 hover:border-gray-700"}`}>
-                            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
+                            <div className="flex flex-row items-center justify-between gap-4 mb-4">
                                 <div className="space-y-1">
                                     <div className="flex items-center gap-2">
                                         <span className={`font-mono uppercase tracking-tighter ${s.isCore ? 'text-terminal-accent font-black text-xl text-neon-pink' : 'text-gray-200 font-bold'}`}>

@@ -12,7 +12,7 @@ export default function Identitas() {
             </Head>
              <div className="space-y-6">
                 <h2 className="text-terminal-accent font-mono text-lg uppercase tracking-widest underline decoration-wavy text-neon-pink">Arsip Identitas</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm font-mono">
+                <div className="grid grid-cols-2 gap-4 text-sm font-mono">
                     <div className="p-4 border border-gray-800 bg-black/40 hover:border-terminal-primary/30 transition-colors">
                         <div className="text-gray-500 mb-1 text-[10px]">IDENTITAS_INTI</div>
                         <div className="text-white">Arif Renggy</div>

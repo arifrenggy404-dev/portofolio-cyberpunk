@@ -53,7 +53,7 @@ export default function TerminalStatusBar() {
             </div>
 
             {/* Center: Security */}
-            <div className="hidden md:flex gap-4 items-center animate-pulse opacity-80">
+            <div className="flex gap-4 items-center animate-pulse opacity-80">
                 <span className="text-terminal-primary">// SEC_STATUS: ENCRYPTED</span>
                 <span className="text-terminal-primary">// FW: ACTIVE</span>
             </div>
