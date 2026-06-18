@@ -5,9 +5,11 @@ import AsciiHeader from '../Components/AsciiHeader';
 import TerminalStatusBar from '../Components/TerminalStatusBar';
 import TerminalNotifications from '../Components/TerminalNotifications';
 import InteractiveBackground from '../Components/InteractiveBackground';
+import InteractiveCli from '../Components/InteractiveCli';
 
 export default function ArsipLayout({ children }) {
     const [logs, setLogs] = useState([]);
+    const [isCliOpen, setIsCliOpen] = useState(false);
 
     const addLog = (message, type = 'SYS') => {
         const id = Math.random().toString(36).substr(2, 9);
@@ -99,6 +101,15 @@ export default function ArsipLayout({ children }) {
                     {children}
                 </main>
             </div>
+
+            <button
+                onClick={() => setIsCliOpen(true)}
+                className="fixed bottom-6 right-6 w-12 h-12 bg-black border border-terminal-primary rounded-full flex items-center justify-center text-terminal-primary hover:bg-terminal-primary hover:text-black transition-all cursor-pointer z-[60] shadow-[0_0_15px_rgba(0,240,255,0.4)] hover:shadow-[0_0_25px_rgba(0,240,255,0.8)] animate-pulse"
+                title="Switch to CLI Mode"
+            >
+                <Terminal size={22} />
+            </button>
+            <InteractiveCli isOpen={isCliOpen} onClose={() => setIsCliOpen(false)} />
         </div>
     );
 }
