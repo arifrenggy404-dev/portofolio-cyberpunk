@@ -44,4 +44,24 @@
   .clip-path-polygon {
     clip-path: polygon(100% 0, 0 0, 100% 100%);
   }
+  
+  /* CRT Glitch Transition Animations */
+  @keyframes crt-flicker {
+    0% { opacity: 0.98; filter: brightness(1); }
+    50% { opacity: 0.95; filter: brightness(0.95); }
+    100% { opacity: 0.99; filter: brightness(1.05); }
+  }
+
+  @keyframes scanline-scroll {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+  }
+
+  .animate-crt-flicker {
+    animation: crt-flicker 0.15s infinite;
+  }
+
+  .animate-scanline-scroll {
+    animation: scanline-scroll 6s linear infinite;
+  }
 }
