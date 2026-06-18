@@ -4,6 +4,7 @@ import { Terminal, Cpu, Layers, Zap, MessageSquare } from 'lucide-react';
 import AsciiHeader from '../Components/AsciiHeader';
 import TerminalStatusBar from '../Components/TerminalStatusBar';
 import TerminalNotifications from '../Components/TerminalNotifications';
+import InteractiveBackground from '../Components/InteractiveBackground';
 
 export default function ArsipLayout({ children }) {
     const [logs, setLogs] = useState([]);
@@ -50,7 +51,8 @@ export default function ArsipLayout({ children }) {
     ];
 
     return (
-        <div className="min-h-screen bg-terminal-bg text-terminal-secondary pt-12 p-4 md:p-8 overflow-hidden relative font-mono selection:bg-terminal-primary selection:text-terminal-bg">
+        <div className="min-h-screen bg-transparent text-terminal-secondary pt-12 p-4 md:p-8 overflow-hidden relative font-mono selection:bg-terminal-primary selection:text-terminal-bg">
+            <InteractiveBackground />
             <TerminalStatusBar />
             <TerminalNotifications logs={logs} />
             
