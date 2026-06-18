@@ -115,21 +115,16 @@ export default function ArsipLayout({ children }) {
                 </div>
             )}
             
-            <header className="max-w-7xl mx-auto border-b border-terminal pb-6 mb-8 flex flex-row justify-between items-end gap-4 relative z-10">
+            <header className="max-w-7xl mx-auto border-b border-terminal/30 pb-1 mb-8 flex flex-col items-center gap-4 relative z-10">
                 <h1 className="sr-only">Arif Renggy - Portofolio Developer Laravel & React</h1>
-                <div className="flex flex-col items-start gap-3 w-auto">
+                
+                {/* Row 1: ASCII Art (Centered) */}
+                <div className="w-full flex justify-center py-2">
                     <AsciiHeader />
-                    <TelemetryWidget />
                 </div>
-                <div className="text-right w-auto">
-                    <div className="flex items-center justify-end gap-2 text-terminal-primary font-mono text-[10px] uppercase mb-1">
-                        <span className="inline-block w-2 h-2 bg-terminal-primary rounded-full animate-pulse"></span>
-                        Terminal Session: Active
-                    </div>
-                    <div className="text-xs text-gray-500 uppercase tracking-widest">
-                        Node: arif-renggy-v4.0.1
-                    </div>
-                </div>
+                
+                {/* Row 2: Telemetry Widget sits directly on/above the header bottom border */}
+                <TelemetryWidget />
             </header>
 
             <div className="max-w-7xl mx-auto grid grid-cols-4 gap-8 relative z-10">
