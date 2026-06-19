@@ -44,13 +44,9 @@ fi
 echo "Menjalankan migrasi database..."
 php artisan migrate --force
 
-# Seed database hanya jika instalasi baru
-if [ "$INITIAL_INSTALL" = true ]; then
-    echo "Instalasi baru terdeteksi, menjalankan database seeder..."
-    php artisan db:seed --force
-else
-    echo "Database sudah ada, melewati langkah seeding."
-fi
+# Seed database (aman & non-destruktif karena pengecekan count === 0)
+echo "Menjalankan database seeder..."
+php artisan db:seed --force
 
 # Optimasi Laravel untuk produksi
 echo "Mengoptimalkan konfigurasi Laravel..."

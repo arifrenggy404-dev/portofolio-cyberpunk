@@ -88,8 +88,9 @@ class ProyekResource extends Resource
                 Tables\Columns\TextColumn::make('tautan_slug')
                     ->label('Slug')
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TagsColumn::make('teknologi_utama')
-                    ->label('Teknologi'),
+                Tables\Columns\TextColumn::make('teknologi_utama')
+                    ->label('Teknologi')
+                    ->badge(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Dibuat Pada')
                     ->dateTime()
